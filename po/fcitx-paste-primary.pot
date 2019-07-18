@@ -17,29 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/tsundere.c:96 src/fcitx-tsundere.conf.in:3
+#: src/paste-primary.c:96 src/fcitx-paste-primary.conf.in:3
 msgid "Tsundere Engine"
 msgstr ""
 
-#: src/fcitx-tsundere.conf.in:4
+#: src/fcitx-paste-primary.conf.in:4
 msgid "Try Ctrl-Shift-T LOL"
 msgstr ""
 
-#: src/fcitx-tsundere.desc:1 src/fcitx-tsundere.desc:6
-#: src/fcitx-tsundere.desc:11
+#: src/fcitx-paste-primary.desc:1 src/fcitx-paste-primary.desc:6
+#: src/fcitx-paste-primary.desc:11
 msgid "Tsundere"
 msgstr ""
 
-#: src/fcitx-tsundere.desc:4
+#: src/fcitx-paste-primary.desc:4
 msgid "Enabled in input"
 msgstr ""
 
-#: src/fcitx-tsundere.desc:9
+#: src/fcitx-paste-primary.desc:9
 msgid ""
 "Character to add following each input character (Use 'juhua' to see magic "
 "LOL)"
 msgstr ""
 
-#: src/fcitx-tsundere.desc:14
+#: src/fcitx-paste-primary.desc:14
 msgid "Toggle for enable or disable"
 msgstr ""

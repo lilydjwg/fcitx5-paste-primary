@@ -33,9 +33,9 @@
 #include "fcitx/instance.h"
 #include "fcitx/context.h"
 #include "fcitx-utils/utils.h"
-#include "tsundere.h"
+#include "paste-primary.h"
 
-#define _(x) dgettext("fcitx-tsundere", (x))
+#define _(x) dgettext("fcitx-paste-primary", (x))
 
 typedef struct _FcitxTsundere {
     FcitxGenericConfig gconfig;
@@ -49,9 +49,9 @@ void* TsundereCreate(FcitxInstance* instance);
 static char* TsundereCommitFilter(void* arg, const char* strin);
 static boolean GetTsundereEnabled(void* arg);
 void ReloadTsundere(void* arg);
-boolean LoadTsundereConfig(FcitxTsundere* tsundereState);
+boolean LoadTsundereConfig(FcitxTsundere* paste-primaryState);
 static FcitxConfigFileDesc* GetTsundereConfigDesc();
-static void SaveTsundereConfig(FcitxTsundere* tsundereState);
+static void SaveTsundereConfig(FcitxTsundere* paste-primaryState);
 static INPUT_RETURN_VALUE HotkeyToggleTsundereState(void*);
 static void ToggleTsundereState(void*);
 
@@ -75,37 +75,37 @@ int ABI_VERSION = FCITX_ABI_VERSION;
 
 void* TsundereCreate(FcitxInstance* instance)
 {
-    FcitxTsundere* tsundereState = fcitx_utils_malloc0(sizeof(FcitxTsundere));
-    tsundereState->owner = instance;
-    if (!LoadTsundereConfig(tsundereState)) {
-        free(tsundereState);
+    FcitxTsundere* paste-primaryState = fcitx_utils_malloc0(sizeof(FcitxTsundere));
+    paste-primaryState->owner = instance;
+    if (!LoadTsundereConfig(paste-primaryState)) {
+        free(paste-primaryState);
         return NULL;
     }
 
     FcitxHotkeyHook hk;
-    hk.arg = tsundereState;
-    hk.hotkey = tsundereState->hkToggle;
+    hk.arg = paste-primaryState;
+    hk.hotkey = paste-primaryState->hkToggle;
     hk.hotkeyhandle = HotkeyToggleTsundereState;
 
     FcitxStringFilterHook shk;
-    shk.arg = tsundereState;
+    shk.arg = paste-primaryState;
     shk.func = TsundereCommitFilter;
 
     FcitxInstanceRegisterHotkeyFilter(instance, hk);
     FcitxInstanceRegisterCommitFilter(instance, shk);
-    FcitxUIRegisterStatus(instance, tsundereState, "tsundere", _("Tsundere Engine"), _("Tsundere Engine"), ToggleTsundereState, GetTsundereEnabled);
+    FcitxUIRegisterStatus(instance, paste-primaryState, "paste-primary", _("Tsundere Engine"), _("Tsundere Engine"), ToggleTsundereState, GetTsundereEnabled);
 
-    return tsundereState;
+    return paste-primaryState;
 }
 
 
 INPUT_RETURN_VALUE HotkeyToggleTsundereState(void* arg)
 {
-    FcitxTsundere* tsundereState = (FcitxTsundere*) arg;
+    FcitxTsundere* paste-primaryState = (FcitxTsundere*) arg;
 
-    FcitxUIStatus *status = FcitxUIGetStatusByName(tsundereState->owner, "tsundere");
+    FcitxUIStatus *status = FcitxUIGetStatusByName(paste-primaryState->owner, "paste-primary");
     if (status->visible){
-        FcitxUIUpdateStatus(tsundereState->owner, "tsundere");
+        FcitxUIUpdateStatus(paste-primaryState->owner, "paste-primary");
         return IRV_DO_NOTHING;
     }
     else
@@ -114,23 +114,23 @@ INPUT_RETURN_VALUE HotkeyToggleTsundereState(void* arg)
 
 void ToggleTsundereState(void* arg)
 {
-    FcitxTsundere* tsundereState = (FcitxTsundere*) arg;
-    tsundereState->enabled = !tsundereState->enabled;
-    SaveTsundereConfig(tsundereState);
+    FcitxTsundere* paste-primaryState = (FcitxTsundere*) arg;
+    paste-primaryState->enabled = !paste-primaryState->enabled;
+    SaveTsundereConfig(paste-primaryState);
 }
 
 boolean GetTsundereEnabled(void* arg)
 {
-    FcitxTsundere* tsundereState = (FcitxTsundere*) arg;
-    return tsundereState->enabled;
+    FcitxTsundere* paste-primaryState = (FcitxTsundere*) arg;
+    return paste-primaryState->enabled;
 }
 
 char* TsundereCommitFilter(void* arg, const char *strin)
 {
-    FcitxTsundere* tsundereState = (FcitxTsundere*) arg;
-    FcitxIM* im = FcitxInstanceGetCurrentIM(tsundereState->owner);
+    FcitxTsundere* paste-primaryState = (FcitxTsundere*) arg;
+    FcitxIM* im = FcitxInstanceGetCurrentIM(paste-primaryState->owner);
 
-    if (!im || !tsundereState->enabled)
+    if (!im || !paste-primaryState->enabled)
         return NULL;
 
     int i = 0;
@@ -139,10 +139,10 @@ char* TsundereCommitFilter(void* arg, const char *strin)
     char* juhua = "\xd2\x89";
     char* marker;
 
-    if (!strcmp(tsundereState->marker, "juhua"))
+    if (!strcmp(paste-primaryState->marker, "juhua"))
         marker = juhua;
     else
-        marker = tsundereState->marker;
+        marker = paste-primaryState->marker;
 
     char* ret = (char *) malloc(sizeof(char) * (len * UTF8_MAX_LENGTH * (1 + fcitx_utf8_strlen(marker)) + 1));
 
@@ -163,7 +163,7 @@ char* TsundereCommitFilter(void* arg, const char *strin)
     return ret;
 }
 
-boolean LoadTsundereConfig(FcitxTsundere* tsundereState)
+boolean LoadTsundereConfig(FcitxTsundere* paste-primaryState)
 {
     FcitxConfigFileDesc* configDesc = GetTsundereConfigDesc();
     if (configDesc == NULL)
@@ -171,18 +171,18 @@ boolean LoadTsundereConfig(FcitxTsundere* tsundereState)
 
     FILE *fp;
     char *file;
-    fp = FcitxXDGGetFileUserWithPrefix("conf", "fcitx-tsundere.config", "r", &file);
+    fp = FcitxXDGGetFileUserWithPrefix("conf", "fcitx-paste-primary.config", "r", &file);
     FcitxLog(DEBUG, "Load Config File %s", file);
     free(file);
     if (!fp) {
         if (errno == ENOENT)
-            SaveTsundereConfig(tsundereState);
+            SaveTsundereConfig(paste-primaryState);
     }
 
     FcitxConfigFile *cfile = FcitxConfigParseConfigFileFp(fp, configDesc);
 
-    FcitxTsundereConfigBind(tsundereState, cfile, configDesc);
-    FcitxConfigBindSync((FcitxGenericConfig*)tsundereState);
+    FcitxTsundereConfigBind(paste-primaryState, cfile, configDesc);
+    FcitxConfigBindSync((FcitxGenericConfig*)paste-primaryState);
 
     if (fp)
         fclose(fp);
@@ -190,15 +190,15 @@ boolean LoadTsundereConfig(FcitxTsundere* tsundereState)
     return true;
 }
 
-CONFIG_DESC_DEFINE(GetTsundereConfigDesc, "fcitx-tsundere.desc")
+CONFIG_DESC_DEFINE(GetTsundereConfigDesc, "fcitx-paste-primary.desc")
 
-void SaveTsundereConfig(FcitxTsundere* tsundereState)
+void SaveTsundereConfig(FcitxTsundere* paste-primaryState)
 {
     FcitxConfigFileDesc* configDesc = GetTsundereConfigDesc();
     char *file;
-    FILE *fp = FcitxXDGGetFileUserWithPrefix("conf", "fcitx-tsundere.config", "w", &file);
+    FILE *fp = FcitxXDGGetFileUserWithPrefix("conf", "fcitx-paste-primary.config", "w", &file);
     FcitxLog(DEBUG, "Save Config to %s", file);
-    FcitxConfigSaveConfigFileFp(fp, &tsundereState->gconfig, configDesc);
+    FcitxConfigSaveConfigFileFp(fp, &paste-primaryState->gconfig, configDesc);
     free(file);
     if (fp)
         fclose(fp);
@@ -206,8 +206,8 @@ void SaveTsundereConfig(FcitxTsundere* tsundereState)
 
 void ReloadTsundere(void* arg)
 {
-    FcitxTsundere* tsundereState = (FcitxTsundere*) arg;
-    LoadTsundereConfig(tsundereState);
+    FcitxTsundere* paste-primaryState = (FcitxTsundere*) arg;
+    LoadTsundereConfig(paste-primaryState);
 }
 
 

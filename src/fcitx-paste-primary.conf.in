@@ -1,8 +1,8 @@
 [Addon]
-Name=fcitx-tsundere
+Name=fcitx-paste-primary
 _GeneralName=Tsundere Engine
 _Comment=Try Ctrl-Shift-T LOL
 Category=Module
 Enabled=True
-Library=fcitx-tsundere.so
+Library=fcitx-paste-primary.so
 Type=SharedLibrary

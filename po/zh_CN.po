@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: fcitx-tsundere\n"
+"Project-Id-Version: fcitx-paste-primary\n"
 "Report-Msgid-Bugs-To: felixonmars@gmail.com\n"
 "POT-Creation-Date: 2012-12-01 19:04-0500\n"
 "PO-Revision-Date: 2012-04-08 23:21+0800\n"
@@ -17,30 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/fcitx-tsundere.desc:9
+#: src/fcitx-paste-primary.desc:9
 msgid ""
 "Character to add following each input character (Use 'juhua' to see magic "
 "LOL)"
 msgstr "在每个输入字符后插入的字符(小提示:试试'juhua')"
 
-#: src/fcitx-tsundere.desc:4
+#: src/fcitx-paste-primary.desc:4
 msgid "Enabled in input"
 msgstr "启用"
 
-#: src/fcitx-tsundere.desc:14
+#: src/fcitx-paste-primary.desc:14
 msgid "Toggle for enable or disable"
 msgstr "启用/禁用"
 
-#: src/fcitx-tsundere.conf.in:4
+#: src/fcitx-paste-primary.conf.in:4
 msgid "Try Ctrl-Shift-T LOL"
 msgstr "试试Ctrl-Shift-T"
 
 # unknown
-#: src/fcitx-tsundere.desc:1 src/fcitx-tsundere.desc:6
-#: src/fcitx-tsundere.desc:11
+#: src/fcitx-paste-primary.desc:1 src/fcitx-paste-primary.desc:6
+#: src/fcitx-paste-primary.desc:11
 msgid "Tsundere"
 msgstr "傲娇"
 
-#: src/tsundere.c:96 src/fcitx-tsundere.conf.in:3
+#: src/paste-primary.c:96 src/fcitx-paste-primary.conf.in:3
 msgid "Tsundere Engine"
 msgstr "傲娇引擎"

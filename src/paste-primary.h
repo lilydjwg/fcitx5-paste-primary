@@ -26,7 +26,7 @@
 extern "C" {
 #endif
 
-#define FCITX_TSUNDERE_NAME "fcitx-tsundere"
+#define FCITX_TSUNDERE_NAME "fcitx-paste-primary"
 
 #ifdef __cplusplus
 }
