@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: felixonmars@gmail.com\n"
-"POT-Creation-Date: 2012-12-01 19:04-0500\n"
+"Report-Msgid-Bugs-To: lilydjwg@gmail.com\n"
+"POT-Creation-Date: 2019-07-18 18:11+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,29 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/paste-primary.c:96 src/fcitx-paste-primary.conf.in:3
-msgid "Tsundere Engine"
+#: src/fcitx-paste-primary.conf.in:3
+msgid "Paste Primary Selection"
 msgstr ""
 
 #: src/fcitx-paste-primary.conf.in:4
-msgid "Try Ctrl-Shift-T LOL"
+msgid "Paste Primary Selection with keyboard shortcut"
 msgstr ""
 
-#: src/fcitx-paste-primary.desc:1 src/fcitx-paste-primary.desc:6
-#: src/fcitx-paste-primary.desc:11
-msgid "Tsundere"
+#: src/fcitx-paste-primary.desc:1
+msgid "Pasteprimary"
 msgstr ""
 
 #: src/fcitx-paste-primary.desc:4
-msgid "Enabled in input"
-msgstr ""
-
-#: src/fcitx-paste-primary.desc:9
-msgid ""
-"Character to add following each input character (Use 'juhua' to see magic "
-"LOL)"
-msgstr ""
-
-#: src/fcitx-paste-primary.desc:14
-msgid "Toggle for enable or disable"
+msgid "Trigger to paste primary selection"
 msgstr ""
