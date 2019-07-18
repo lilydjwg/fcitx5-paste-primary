@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2012~2012 by Felix Yan                                  *
- *   felixonmars@gmail.com                                                 *
+ *   Copyright (C) 2019 by lilydjwg                                        *
+ *   lilydjwg@gmail.com                                                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,15 +18,15 @@
  *   51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.              *
  ***************************************************************************/
 
-#ifndef _FCITX_MODULE_TSUNDERE_H_
-#define _FCITX_MODULE_TSUNDERE_H_
+#ifndef _FCITX_MODULE_PASTE_PRIMARY_H_
+#define _FCITX_MODULE_PASTE_PRIMARY_H_
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define FCITX_TSUNDERE_NAME "fcitx-paste-primary"
+#define FCITX_PASTE_PRIMARY_NAME "fcitx-paste-primary"
 
 #ifdef __cplusplus
 }
