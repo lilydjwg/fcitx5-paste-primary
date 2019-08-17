@@ -97,8 +97,6 @@ static void _X11ClipboardConvertCb(
     if (format != 8)
         return;
 
-    fwrite(buff, sizeof(char), nitems, stderr);
-
     FcitxPasteprimary* pasteprimary = owner;
     FcitxInstance *instance = pasteprimary->owner;
 
