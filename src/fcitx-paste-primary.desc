@@ -1,7 +1,0 @@
-[Pasteprimary/Hotkey]
-Type=Hotkey
-DefaultValue=CTRL_;
-Description=Trigger to paste primary selection
-
-[DescriptionFile]
-LocaleDomain=fcitx

@@ -1,8 +1,0 @@
-[Addon]
-Name=fcitx-paste-primary
-_GeneralName=Paste Primary Selection
-_Comment=Paste Primary Selection with keyboard shortcut
-Category=Module
-Enabled=True
-Library=fcitx-paste-primary.so
-Type=SharedLibrary

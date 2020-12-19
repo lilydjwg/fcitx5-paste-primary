@@ -1,0 +1,11 @@
+[Addon]
+Name=Paste Primary Selection
+Comment=Paste Primary Selection with keyboard shortcut
+Category=Module
+Type=SharedLibrary
+OnDemand=False
+Library=paste-primary
+Configurable=True
+
+[Addon/Dependencies]
+0=xcb

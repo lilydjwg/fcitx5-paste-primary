@@ -1,17 +1,25 @@
-project(fcitx-paste-primary)
-cmake_minimum_required(VERSION 2.6)
+project(fcitx5-paste-primary)
+cmake_minimum_required(VERSION 3.8)
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
-find_package(Fcitx 4.2.7 REQUIRED)
+find_package(ECM REQUIRED 1.0.0)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+
 find_package(PkgConfig REQUIRED)
 find_package(Gettext REQUIRED)
 
-_fcitx_add_uninstall_target()
+include(FeatureSummary)
+include(GNUInstallDirs)
+include(ECMSetupVersion)
+include(ECMUninstallTarget)
 
-set(CMAKE_C_FLAGS "-Wall -Wextra -Wno-sign-compare -Wno-unused-parameter -fvisibility=hidden ${CMAKE_C_FLAGS}")
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-sign-compare -Wno-unused-parameter -fvisibility=hidden ${CMAKE_CXX_FLAGS}")
-set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed ${CMAKE_SHARED_LINKER_FLAGS}")
-set(CMAKE_MODULE_LINKER_FLAGS "-Wl,--as-needed ${CMAKE_MODULE_LINKER_FLAGS}")
+find_package(Fcitx5Core 5.0 REQUIRED)
+find_package(Fcitx5Module REQUIRED COMPONENTS XCB )
+include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
+
+add_definitions(-DFCITX_GETTEXT_DOMAIN=\"fcitx5-paste-primary\")
+fcitx5_add_i18n_definition()
 
 add_subdirectory(po)
 add_subdirectory(src)
+
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
