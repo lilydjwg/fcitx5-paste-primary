@@ -12,8 +12,9 @@ include(GNUInstallDirs)
 include(ECMSetupVersion)
 include(ECMUninstallTarget)
 
+find_package(Threads REQUIRED)
 find_package(Fcitx5Core 5.0 REQUIRED)
-find_package(Fcitx5Module REQUIRED COMPONENTS XCB )
+find_package(Fcitx5Module REQUIRED COMPONENTS XCB)
 include("${FCITX_INSTALL_CMAKECONFIG_DIR}/Fcitx5Utils/Fcitx5CompilerSettings.cmake")
 
 add_definitions(-DFCITX_GETTEXT_DOMAIN=\"fcitx5-paste-primary\")

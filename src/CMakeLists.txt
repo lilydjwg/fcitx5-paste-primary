@@ -1,5 +1,5 @@
 add_library(paste-primary MODULE paste-primary.cpp)
-target_link_libraries(paste-primary Fcitx5::Core Fcitx5::Module::XCB)
+target_link_libraries(paste-primary Fcitx5::Core Fcitx5::Module::XCB Threads::Threads)
 set_target_properties(paste-primary PROPERTIES PREFIX "")
 install(TARGETS paste-primary DESTINATION "${CMAKE_INSTALL_LIBDIR}/fcitx5")
 
