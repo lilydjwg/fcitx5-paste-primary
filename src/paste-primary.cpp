@@ -51,10 +51,10 @@ static void _run_thread(WaylandPrimarySelectionCallback callback) {
         return;
     }
 
-    char buf[8192];
+    char buf[4000];
     int n;
     std::string s;
-    while ((n = read(pfds[0], buf, 8192)) != 0) {
+    while ((n = read(pfds[0], buf, 4000)) != 0) {
         s.append(buf, n);
     }
     close(pfds[0]);
@@ -85,32 +85,38 @@ fcitx::PastePrimary::PastePrimary(fcitx::Instance *instance)
                 auto ic = keyEvent.inputContext();
 
                 if (stringutils::startsWith(ic->display(), "wayland:")) {
-                  _get_primary_wayland(
-                      [this, icRef = ic->watch()](std::string str) {
-                          // Check if IC is still valid and has focus.
-                          if (auto *ic = icRef.get(); ic && ic->hasFocus()) {
-                              ic->commitString(str);
-                          }
-                      });
-                  keyEvent.filterAndAccept();
+                    _get_primary_wayland(
+                        [this, icRef = ic->watch()](std::string str) {
+                            // Check if IC is still valid and has focus.
+                            if (auto *ic = icRef.get(); ic && ic->hasFocus()) {
+                                size_t start = 0;
+                                size_t MAX_CHUNK_SIZE = 4000;
+                                while (start < str.size()) {
+                                    size_t chunk_size = std::min(MAX_CHUNK_SIZE, str.size() - start);
+                                    ic->commitString(str.substr(start, chunk_size));
+                                    start += chunk_size;
+                                }
+                            }
+                        });
+                    keyEvent.filterAndAccept();
 
                 } else if (stringutils::startsWith(ic->display(), "x11:")) {
-                  // Fetch primary and do thing in callback.
-                  primaryCallback_ = xcb()->call<IXCBModule::convertSelection>(
-                      ic->display().substr(4), "PRIMARY", "",
-                      [this, icRef = ic->watch()](xcb_atom_t, const char *data,
-                                                  size_t length) {
-                          if (data) {
-                              // Check if IC is still valid and has focus.
-                              if (auto *ic = icRef.get(); ic && ic->hasFocus()) {
-                                  std::string str(data, length);
-                                  ic->commitString(str);
-                              }
-                          }
-                          // Clear the callback handler.
-                          primaryCallback_.reset();
-                      });
-                  keyEvent.filterAndAccept();
+                    // Fetch primary and do thing in callback.
+                    primaryCallback_ = xcb()->call<IXCBModule::convertSelection>(
+                        ic->display().substr(4), "PRIMARY", "",
+                        [this, icRef = ic->watch()](xcb_atom_t, const char *data,
+                                                    size_t length) {
+                            if (data) {
+                                // Check if IC is still valid and has focus.
+                                if (auto *ic = icRef.get(); ic && ic->hasFocus()) {
+                                    std::string str(data, length);
+                                    ic->commitString(str);
+                                }
+                            }
+                            // Clear the callback handler.
+                            primaryCallback_.reset();
+                        });
+                    keyEvent.filterAndAccept();
                 }
             }
         });
